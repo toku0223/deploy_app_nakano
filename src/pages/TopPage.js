@@ -1,5 +1,6 @@
 import React, { useContext, useState, useReducer } from 'react';
 import { Button, Form } from 'react-bootstrap';
+
 import { Store } from '../store/index';
 import { HELLO, INCREMENT } from '../actions/index';
 import reducer from '../reducers/index';
@@ -10,6 +11,7 @@ const TopPage = () => {
     const [count, setCount] = useState(0);
     const [text, setText] = useState("")
     const [text2, setText2] = useState("")
+    const [error, setError] = useState("")
 
     // const Hello = (e) => {
     //     e.preventDefault();
@@ -37,8 +39,15 @@ const TopPage = () => {
     }
 
     const onClickText = () => {
-        setText2(text);
-        setText("")
+        if (text == "") {
+            setError("なにか入力してください")
+            setText2(text)
+            setText("")
+        } else {
+            setText2(text)
+            setText("")
+            setError("")
+        }
     }
 
     return (
@@ -54,12 +63,13 @@ const TopPage = () => {
 
 
             <input
-                type=""
+                type="text"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
             />
             <Button onClick={onClickText}>hello</Button>
             <p>{text2}</p>
+            <p style={{ color: "red" }}>{error}</p>
 
         </>
     );
