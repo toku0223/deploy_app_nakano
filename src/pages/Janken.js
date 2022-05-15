@@ -9,6 +9,7 @@ const Janken = () => {
 
 
     const hand = ['ぐー', 'ちょき', 'ぱー'];
+    const num = Math.floor(Math.random() * hand.length);
 
 
     useEffect(() => {
@@ -17,25 +18,29 @@ const Janken = () => {
 
     const rock = () => {
         setMe("ぐー")
-        const num = Math.floor(Math.random() * hand.length);
         setEnemy(hand[num])
     }
     const scissors = () => {
         setMe("ちょき")
-        const num = Math.floor(Math.random() * hand.length);
         setEnemy(hand[num])
     }
     const paper = () => {
         setMe("ぱー")
-        const num = Math.floor(Math.random() * hand.length);
         setEnemy(hand[num])
     }
 
     const fight = () => {
+        if (me === "") return
         if (me === enemy) {
             setResult('引き分けです。')
             console.log('引き分け')
         }
+        // if (me === 'ぐー' && enemy === 'ぐー' ||
+        //     me === 'ちょき' && enemy === 'ちょき' ||
+        //     me === 'ぱー' && enemy === 'ぱー') {
+        //     setResult('引き分けです。')
+        //     console.log('引き分け')
+        // }
         if (me === 'ぐー' && enemy === 'ちょき' ||
             me === 'ちょき' && enemy === 'ぱー' ||
             me === 'ぱー' && enemy === 'ぐー') {
@@ -47,6 +52,7 @@ const Janken = () => {
             me === 'ぱー' && enemy === 'ちょき') {
             setResult('あなたの負けです。')
             console.log('負け')
+
         };
     }
 
