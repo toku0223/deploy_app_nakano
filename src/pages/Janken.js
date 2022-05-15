@@ -1,66 +1,76 @@
-import React, { useContext, useState, useReducer, useEffect } from 'react';
-import { Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
+const ROCK = "ぐー"
+const SCISSORS = "ちょき"
+const PAPER = "ぱー"
+const WIN = "あなたの勝ちです"
+const LOSE = "あなたの負けです"
+const DRAW = "引き分けです"
+const hand = [ROCK, SCISSORS, PAPER];
 
 const Janken = () => {
     const [me, setMe] = useState("")
     const [enemy, setEnemy] = useState("")
     const [result, setResult] = useState("")
-
-
-    const hand = ['ぐー', 'ちょき', 'ぱー'];
-
-
+    
     useEffect(() => {
         fight()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [me, enemy]);
 
-    const rock = () => {
-        setMe("ぐー")
-        const num = Math.floor(Math.random() * hand.length);
-        setEnemy(hand[num])
+    const decideMyHand = (te) => {
+        decideCPUHand()
+        switch (te) {
+            case ROCK:
+                setMe(ROCK)
+                return;
+            case SCISSORS:
+                setMe(SCISSORS)
+                return;
+            case PAPER:
+                setMe(PAPER)
+                return;
+            default:
+                break;
+        }
     }
-    const scissors = () => {
-        setMe("ちょき")
-        const num = Math.floor(Math.random() * hand.length);
-        setEnemy(hand[num])
-    }
-    const paper = () => {
-        setMe("ぱー")
+
+    const decideCPUHand = () => {
         const num = Math.floor(Math.random() * hand.length);
         setEnemy(hand[num])
     }
 
     const fight = () => {
+        if(me === "") return
         if (me === enemy) {
-            setResult('引き分けです。')
-            console.log('引き分け')
+            setResult(DRAW)
+            console.log(DRAW)
         }
         if (me === 'ぐー' && enemy === 'ちょき' ||
             me === 'ちょき' && enemy === 'ぱー' ||
             me === 'ぱー' && enemy === 'ぐー') {
-            setResult('あなたの勝ちです。')
+            setResult(WIN)
             console.log('勝ち')
         }
         if (me === 'ぐー' && enemy === 'ぱー' ||
             me === 'ちょき' && enemy === 'ぐー' ||
             me === 'ぱー' && enemy === 'ちょき') {
-            setResult('あなたの負けです。')
+            setResult(LOSE)
             console.log('負け')
         };
     }
-
 
     return (
         <>
             <Link to="/Toppage">トップへ戻る</Link>
             <br />
-            <Button onClick={rock}>ぐー</Button>
-            <Button onClick={scissors}>ちょき</Button>
-            <Button onClick={paper}>ぱー</Button>
+            <Button onClick={() => decideMyHand(ROCK)}>ぐー</Button>
+            <Button onClick={() => decideMyHand(SCISSORS)}>ちょき</Button>
+            <Button onClick={() => decideMyHand(PAPER)}>ぱー</Button>
             <p>あなたの手:{me}</p>
             <p>cpuの手:{enemy}</p>
-            {/* <Button onClick={fight}>結果</Button> */}
             <p>勝敗:{result}</p>
         </>
     );
