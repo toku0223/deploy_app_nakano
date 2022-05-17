@@ -46,8 +46,18 @@ const TopPage = () => {
 
     return (
         <>
-            <Link to="/Janken">じゃんけん</Link>
-            <br />
+            <h1>TopPage</h1>
+            <ul>
+                <li>
+                    <Link to="/">Home</Link>
+                </li>
+                <li>
+                    <Link to="/Janken">じゃんけん</Link>
+                </li>
+                <li>
+                    <Link to="/Qiita">QiitaAPI</Link>
+                </li>
+            </ul>
             <Button variant="primary" onClick={Hello}>Hello world</Button>
             <br />
             <Button variant="primary" onClick={increment}>いいね！</Button>

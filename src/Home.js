@@ -13,6 +13,9 @@ const Home = () => {
                 <li>
                     <Link to="/Janken">じゃんけん</Link>
                 </li>
+                <li>
+                    <Link to="/Qiita">QiitaAPI</Link>
+                </li>
             </ul>
         </>
     )
