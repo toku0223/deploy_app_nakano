@@ -32,7 +32,7 @@ const Qiita = () => {
                 </li>
             </ul>
 
-            <Table striped bordered hover variant="dark">
+            <Table variant="dark">
                 <thead>
                     <tr>
                         <th>title</th>
@@ -42,7 +42,8 @@ const Qiita = () => {
                     {data.map((d, index) => {
                         return (
                             <tr key={index}>
-                                <td>{d.title}</td>
+                                <td>{d.title}<br />{d.url}</td>
+
                             </tr>
                         )
                     })}
