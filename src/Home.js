@@ -16,6 +16,12 @@ const Home = () => {
                 <li>
                     <Link to="/Qiita">QiitaAPI</Link>
                 </li>
+                <li>
+                    <Link to="/PageA">PageA</Link>
+                </li>
+                <li>
+                    <Link to="/PageB">PageB</Link>
+                </li>
             </ul>
         </>
     )
