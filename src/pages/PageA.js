@@ -6,6 +6,7 @@ const PageA = () => {
     return (
         <>
             <h1>PageA</h1>
+            <Link to="/PageB">PageBへ</Link>
         </>
     )
 }
