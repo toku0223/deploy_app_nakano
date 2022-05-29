@@ -1,6 +1,6 @@
 import React from 'react';
 import useNavigate from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Link, useParams, Switch, Routes } from 'react-router-dom';
 
 const Home = () => {
 
@@ -21,6 +21,9 @@ const Home = () => {
                 </li>
                 <li>
                     <Link to="/PageB">PageB</Link>
+                </li>
+                <li>
+                    <Link to="/Uranai">色診断占い</Link>
                 </li>
             </ul>
         </>

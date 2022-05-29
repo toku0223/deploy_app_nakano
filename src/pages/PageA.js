@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useParams, Route, Switch } from 'react-router-dom';
 
 const PageA = () => {
+    const HelloWorld = useParams('')
+    console.log(HelloWorld)
+
     return (
         <>
             <h1>PageA</h1>
-            <Link to="/PageB">PageBへ</Link>
+            {/* <h2>{HelloWorld}</h2> */}
         </>
     )
 }
