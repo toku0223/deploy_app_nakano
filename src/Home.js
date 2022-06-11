@@ -25,6 +25,13 @@ const Home = () => {
                 <li>
                     <Link to="/Uranai">色診断占い</Link>
                 </li>
+                <li>
+                    <Link to="/Login">ログイン</Link>
+                </li> <li>
+                    <Link to="/Main">メイン</Link>
+                </li> <li>
+                    <Link to="/CreateUser">クリエイトユーザー</Link>
+                </li>
             </ul>
         </>
     )

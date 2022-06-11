@@ -7,6 +7,9 @@ import Qiita from './pages/Qiita';
 import PageA from './pages/PageA';
 import PageB from './pages/PageB';
 import Uranai from './pages/Uranai';
+import Login from './pages/Login';
+import Main from './pages/Main';
+import CreateUser from './pages/CreateUser';
 import NotFound from './pages/NotFound';
 
 const App = () => {
@@ -23,6 +26,9 @@ const App = () => {
           {/* <Route path="/PageB/:HelloWorld" element={<PageB />} />
           </Route> */}
           <Route exact path="/Uranai" element={<Uranai />} />
+          <Route exact path="/Login" element={<Login />} />
+          <Route exact path="/Main" element={<Main />} />
+          <Route exact path="/CreateUser" element={<CreateUser />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Router>

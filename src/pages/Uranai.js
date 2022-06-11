@@ -16,6 +16,10 @@ const Uranai = () => {
     const monthList = () => {
         for (let i = 1; i <= 12; i++) {
             const option = document.createElement('option');
+            console.log(option)
+            if (option.value === 12) {
+
+            }
             option.value = i;
             option.text = i;
             monthRef.current.appendChild(option);
@@ -57,6 +61,9 @@ const Uranai = () => {
 
     }
 
+    const MonthList = () => {
+
+    }
 
     const takeURL = () => {
         console.log(date)
@@ -73,8 +80,6 @@ const Uranai = () => {
     }
     return (
         <>
-            <a href={url} target="_blank">色占い</a>
-            <br />
             {/* <input
                 type="number"
                 value={date}
@@ -89,7 +94,8 @@ const Uranai = () => {
             <label>
                 <select ref={dayRef} value={day} onChange={selectDay}></select>日
             </label>
-
+            <br />
+            <input type='date' />
         </>
     )
 }
