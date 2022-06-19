@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { loginHandleClick } from '../config/firebase';
 
 const Login = () => {
@@ -11,12 +11,20 @@ const Login = () => {
     const navigate = useNavigate();
 
     const handleClick = async () => {
-        const result = await loginHandleClick(email, password)
-        if (result) {
+        try {
+            const result = await loginHandleClick(email, password)
             navigate('/main')
-        } else {
-            setError("email、passwordを入力してください。")
+        } catch (error) {
+            console.log(error)
+            if (error === "Firebase: Error (auth/invalid-email).") {
+                setError("email、passwordを入力してください。")
+            } else if (error === "Firebase: Error (auth/internal-error).") {
+                setError("ログインに失敗しました。")
+            } else if (error === "Firebase: Error (auth/wrong-password).") {
+                setError("パスワードが間違っています。")
+            }
         }
+
     }
     const handleGoogleClick = () => {
         const provider = new GoogleAuthProvider();

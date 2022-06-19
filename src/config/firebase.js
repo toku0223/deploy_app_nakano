@@ -40,16 +40,23 @@ export const createUser = (email, password) => {
 }
 export const loginHandleClick = (email, password) => {
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in
-            const user = userCredential.user;
-            // ...
+    return new Promise((resolve, reject) => {
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                // ...
+                resolve(user)
 
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(error.message)
-        });
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(error.message)
+                reject(errorMessage)
+
+            });
+    })
+
+
 }
