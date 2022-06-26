@@ -1,5 +1,13 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+    getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+    signInWithPopup, GoogleAuthProvider
+} from "firebase/auth";
 import { initializeApp } from 'firebase/app';
+import {
+    addDoc, getFirestore, collection,
+    query, addDocs, getDocs, updateDoc,
+    doc, deleteDoc
+} from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -59,4 +67,46 @@ export const loginHandleClick = (email, password) => {
     })
 
 
+}
+export const db = getFirestore();
+
+export const createDataInFirebase = async () => {
+    let returnObj = ""
+    console.log('firebase start')
+    try {
+        const docRef = await addDoc(collection(db, "users"), {
+            first: "AdaAda",
+            last: "Lovelace",
+            born: 1815
+        });
+        returnObj = "test1"
+        console.log("Document written with ID:", docRef.id);
+    } catch (e) {
+        returnObj = "test2"
+        console.error("Error adding document:", e)
+    }
+    return returnObj
+}
+
+export const readData = async () => {
+    console.log('readData')
+    const q = query(collection(db, "users"));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+        console.log(doc.id, "=>", doc.data());
+    });
+};
+
+export const updateData = async () => {
+    const washingtonRef = doc(db, "users", "8xk1Z5J7aX3pNbT6hxyE");
+    await updateDoc(washingtonRef, {
+        capital: true
+    });
+};
+
+export const deleteData = async () => {
+    const cityRef = deleteDoc(doc(db, 'users', '8xk1Z5J7aX3pNbT6hxyE'))
+    // await updateDoc(cityRef, {
+    //     capital: deleteField()
+    // })
 }
