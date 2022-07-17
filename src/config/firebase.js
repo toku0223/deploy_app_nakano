@@ -6,7 +6,7 @@ import { initializeApp } from 'firebase/app';
 import {
     addDoc, getFirestore, collection,
     query, addDocs, getDocs, updateDoc,
-    doc, deleteDoc
+    doc, deleteDoc, setDoc, where
 } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -70,14 +70,14 @@ export const loginHandleClick = (email, password) => {
 }
 export const db = getFirestore();
 
-export const createDataInFirebase = async () => {
+export const createDataInFirebase = async (first, last, born) => {
     let returnObj = ""
     console.log('firebase start')
     try {
         const docRef = await addDoc(collection(db, "users"), {
-            first: "AdaAda",
-            last: "Lovelace",
-            born: 1815
+            first,
+            last,
+            born,
         });
         returnObj = "test1"
         console.log("Document written with ID:", docRef.id);
@@ -90,7 +90,7 @@ export const createDataInFirebase = async () => {
 
 export const readData = async () => {
     console.log('readData')
-    const q = query(collection(db, "users"));
+    const q = query(collection(db, "users"), where("born", "==", "1996"));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
         console.log(doc.id, "=>", doc.data());
@@ -98,15 +98,19 @@ export const readData = async () => {
 };
 
 export const updateData = async () => {
-    const washingtonRef = doc(db, "users", "8xk1Z5J7aX3pNbT6hxyE");
+    const washingtonRef = doc(db, "users", "OP57uDtNV1jUe5IM6Lj3");
     await updateDoc(washingtonRef, {
         capital: true
     });
 };
 
 export const deleteData = async () => {
-    const cityRef = deleteDoc(doc(db, 'users', '8xk1Z5J7aX3pNbT6hxyE'))
+    const cityRef = deleteDoc(doc(db, 'users', 'OP57uDtNV1jUe5IM6Lj3'))
     // await updateDoc(cityRef, {
     //     capital: deleteField()
     // })
+}
+
+export const createPersonal = async () => {
+    const info = {}
 }
